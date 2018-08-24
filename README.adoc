@@ -20,10 +20,9 @@ toc::[]
 == Introduction
 :link-shared-library: https://jenkins.io/doc/book/pipeline/shared-libraries/
 
-This is a {link-shared-library}[Shared Jenkins Library] that's automatically
-imported into every Jenkinsfile. The automatic loading means that all the
-<<global-variables>> described below are always available in every
-Jenkinsfile.
+This is a {link-shared-library}[Shared Jenkins Library]. If included in a
+Jenkinsfile with `@Library('pipeline-lib') _`, then all the
+<<global-variables>> described below will be available in that Jenkinsfile.
 
 == Global variables
 
@@ -37,6 +36,7 @@ flow and to adopt Continuous Deployment via branch deploys, follow these
 steps:
 
 . Upgrade the project's Jenkinsfile to:
+.. Include this library with `@Library('pipeline-lib') _`
 .. Configure the job's properties
 .. Wrap the arguments of `podTemplate`, <<code-inpod-code>>, or other with
 `deployer.wrapPodTemplate`
@@ -104,7 +104,8 @@ The exact changes required depend on the project, but here's an example.
 [source,diff]
 ----
  // At the top level
-+@Library('SaleMoveAcceptance') _ // <1>
+ @Library('pipeline-lib') _
++@Library('SaleMoveAcceptance') __ // <1>
 
  // In podTemplate, inPod, or similar, after building a docker image
  def image = docker.build('call-router')
@@ -153,9 +154,10 @@ The exact changes required depend on the project, but here's an example.
 -build(job: 'kubernetes-deploy', ...)
 ----
 <1> This is needed for running acceptance tests before deploying to other
-environments. If you already have a `@Library` import followed by a single
-underscore, then change the underscore to two underscores (`__`) or more, as
-required. The symbol {link-using-libraries}[has to be unique] within the Jenkinsfile.
+environments. If you already have a `@Library` import followed by a two
+underscores, then change them to three underscores (`___`) or more, as
+required. The symbol {link-using-libraries}[has to be unique] within the
+Jenkinsfile.
 <2> No need to push the image to anywhere. Just build it and pass to
 `deployOnCommentTrigger`, which tags and pushes as required.
 <3> The image defaults to the current version of the application image.
