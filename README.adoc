@@ -12,10 +12,11 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+:link-video: https://youtu.be/h8-bG6gyUjo
 :link-slides: https://docs.google.com/presentation/d/108Y9_JYlDFR5JarPGqkfzz2wVN2FsrcvjE4oRHKMPhI/edit?usp=sharing
 
-Global shared library for SaleMove pipeline jobs. See introductory video (TBD)
-and {link-slides}[slides].
+Global shared library for SaleMove pipeline jobs. See introductory
+{link-video}[video] and {link-slides}[slides].
 
 == Table of Contents
 toc::[]
